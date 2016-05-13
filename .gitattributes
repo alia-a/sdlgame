@@ -47,6 +47,4 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-.~ !text !filter !merge !diff
 . !text !filter !merge !diff
-SDLGame/files/gfx !text !filter !merge !diff

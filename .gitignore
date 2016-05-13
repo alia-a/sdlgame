@@ -243,3 +243,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+SDLGame.xcodeproj/project.xcworkspace
+SDLGame.xcodeproj/xcuserdata
