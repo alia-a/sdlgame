@@ -29,7 +29,7 @@ RotatingColourScene::RotatingColourScene() {
 		fn_large_->set_rotation_degrees(45.f);
 
 		add_child(fn_large_);
-		auto task = SHARED(Engine::TaskRotate)(fn_large_, 90.f);
+		const auto task = SHARED(Engine::TaskRotate)(fn_large_, 90.f);
 
 		get_scheduler()->add_task(task);
 	}
@@ -41,17 +41,17 @@ RotatingColourScene::RotatingColourScene() {
 
 		fn_large_->add_child(sprite_);
 
-		auto seq = SHARED(Engine::SequenceTask)();
+		const auto seq = SHARED(Engine::SequenceTask)();
 		{
-			auto task = SHARED(Engine::TaskScale)(sprite_, 1.f, vec2{2.f});
+			const auto task = SHARED(Engine::TaskScale)(sprite_, 1.f, vec2{2.f});
 			seq->add_task(task);
 		}
 		{
-			auto task = SHARED(Engine::TaskScale)(sprite_, 1.f, vec2{4.f});
+			const auto task = SHARED(Engine::TaskScale)(sprite_, 1.f, vec2{4.f});
 			seq->add_task(task);
 		}
 
-		auto repeat = SHARED(Engine::RepeateTask)(-1);
+		const auto repeat = SHARED(Engine::RepeateTask)(-1);
 		repeat->add_task(seq);
 
 		get_scheduler()->add_task(repeat);
@@ -63,26 +63,27 @@ RotatingColourScene::RotatingColourScene() {
 		fn_small_->set_rotation_degrees(45.f);
 
 		sprite_->add_child(fn_small_);
-		auto task = SHARED(Engine::TaskRotate)(fn_small_, 45.f);
+		const auto task = SHARED(Engine::TaskRotate)(fn_small_, 45.f);
 
 		get_scheduler()->add_task(task);
 	}
 
 	{
-		auto task = SHARED(Engine::TaskCall)([ s = fn_small_, l = fn_large_, sp = sprite_ ](float dt)->bool {
+		const auto task = SHARED(Engine::TaskCall)([s = fn_small_, l = fn_large_, sp = sprite_](const float dt) -> bool {
 			UNUSED(dt);
-			const auto& md = Engine::Events::handler->get_mouse_data();
-			if (md.buttons_.at(Engine::MouseButton::LEFT).is_pressed()) {
-				s->set_position(Engine::Transform::translate_from_world(sp->get_index(), md.position_));
 
-				if (l->contains(md.position_)) {
-					LOG("Hit the square");
+			const auto& md = Engine::Events::handler->get_mouse_data();
+			if (md.buttons.at(Engine::MouseButton::LEFT).is_pressed()) {
+				s->set_position(Engine::Transform::translate_from_world(sp->get_index(), md.position));
+
+				if (l->contains(md.position)) {
+					LOG("Hit the square")
 				} else {
-					LOG("Missed the square");
+					LOG("Missed the square")
 				}
 			}
-			if (md.buttons_.at(Engine::MouseButton::RIGHT).is_pressed()) {
-				l->set_position(md.position_);
+			if (md.buttons.at(Engine::MouseButton::RIGHT).is_pressed()) {
+				l->set_position(md.position);
 			}
 
 			return false;
@@ -90,7 +91,4 @@ RotatingColourScene::RotatingColourScene() {
 
 		Engine::MainScheduler::get_main_scheduler()->add_task(task);
 	}
-}
-
-RotatingColourScene::~RotatingColourScene() {
 }

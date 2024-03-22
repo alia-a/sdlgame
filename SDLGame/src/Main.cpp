@@ -7,21 +7,21 @@
 
 #include "Globals.h"
 #include "Scenes/RotatingColourScene.h"
-#include "Scenes/LoadingScene.h"
+// #include "Scenes/LoadingScene.h"
 
 void callback() {
-	LOG("Initialization done");
+	LOG("Initialization done")
 
-	scenes.handler = SHARED(Engine::SceneHandler)();
+	Scenes::handler = SHARED(Engine::SceneHandler)();
 
 	auto* root = Engine::Node::get_root();
-	root->add_child(scenes.handler);
+	root->add_child(Scenes::handler);
 
-  scenes.handler->push_scene(SHARED(RotatingColourScene)(), SHARED(Engine::SceneTransition)(), SHARED(Engine::SceneTransition)());
+	Scenes::handler->push_scene(SHARED(RotatingColourScene)(), SHARED(Engine::SceneTransition)(), SHARED(Engine::SceneTransition)());
 }
 
 void exit_cb() {
-	scenes.handler->pop_all_scenes();
+	Scenes::handler->pop_all_scenes();
 }
 
 int main(int, char**) {

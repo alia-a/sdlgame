@@ -5,5 +5,5 @@
 ENG_CLASS_DERIVED(EmptyModalScene) : public Engine::Scene {
 public:
 	EmptyModalScene();
-	virtual ~EmptyModalScene();
+	~EmptyModalScene() override = default;
 };
