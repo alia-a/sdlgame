@@ -21,7 +21,7 @@
 RotatingColourScene::RotatingColourScene() {
 
 	const auto menu = SHARED(Engine::Menu)();
-	get_scheduler()->add_task(menu);
+	get_scheduler()->add_task(guard(), menu);
 
 	{
 		fn_large_ = SHARED(Engine::FillNode)(1440.f, 1440.f);
@@ -31,7 +31,7 @@ RotatingColourScene::RotatingColourScene() {
 		add_child(fn_large_);
 		const auto task = SHARED(Engine::TaskRotate)(fn_large_, 90.f);
 
-		get_scheduler()->add_task(task);
+		get_scheduler()->add_task(guard(), task);
 	}
 
 	{
@@ -44,17 +44,17 @@ RotatingColourScene::RotatingColourScene() {
 		const auto seq = SHARED(Engine::SequenceTask)();
 		{
 			const auto task = SHARED(Engine::TaskScale)(sprite_, 1.f, vec2{2.f});
-			seq->add_task(task);
+			seq->add_task(guard(), task);
 		}
 		{
 			const auto task = SHARED(Engine::TaskScale)(sprite_, 1.f, vec2{4.f});
-			seq->add_task(task);
+			seq->add_task(guard(), task);
 		}
 
 		const auto repeat = SHARED(Engine::RepeateTask)(-1);
-		repeat->add_task(seq);
+		repeat->add_task(guard(), seq);
 
-		get_scheduler()->add_task(repeat);
+		get_scheduler()->add_task(guard(), repeat);
 	}
 
 	{
@@ -65,7 +65,7 @@ RotatingColourScene::RotatingColourScene() {
 		sprite_->add_child(fn_small_);
 		const auto task = SHARED(Engine::TaskRotate)(fn_small_, 45.f);
 
-		get_scheduler()->add_task(task);
+		get_scheduler()->add_task(guard(), task);
 	}
 
 	{
@@ -89,6 +89,6 @@ RotatingColourScene::RotatingColourScene() {
 			return false;
 		});
 
-		Engine::MainScheduler::get_main_scheduler()->add_task(task);
+		Engine::MainScheduler::get_main_scheduler()->add_task(guard(), task);
 	}
 }
