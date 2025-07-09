@@ -245,3 +245,5 @@ ModelManifest.xml
 .fake/
 SDLGame.xcodeproj/project.xcworkspace
 SDLGame.xcodeproj/xcuserdata
+
+/vcpkg_installed/

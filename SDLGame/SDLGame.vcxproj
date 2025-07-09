@@ -83,6 +83,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -190,6 +193,7 @@ xcopy $(ProjectDir)files\* $(OutDir)files\ /E /Y
     <ClCompile Include="src\Globals.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Scenes\EmptyModalScene.cpp" />
+    <ClCompile Include="src\Scenes\GameScene.cpp" />
     <ClCompile Include="src\Scenes\LoadingScene.cpp" />
     <ClCompile Include="src\Scenes\RotatingColourScene.cpp" />
     <ClCompile Include="src\Textures.cpp" />
@@ -197,6 +201,7 @@ xcopy $(ProjectDir)files\* $(OutDir)files\ /E /Y
   <ItemGroup>
     <ClInclude Include="src\Globals.h" />
     <ClInclude Include="src\Scenes\EmptyModalScene.h" />
+    <ClInclude Include="src\Scenes\GameScene.h" />
     <ClInclude Include="src\Scenes\LoadingScene.h" />
     <ClInclude Include="src\Scenes\RotatingColourScene.h" />
     <ClInclude Include="src\Textures.h" />
@@ -206,6 +211,9 @@ xcopy $(ProjectDir)files\* $(OutDir)files\ /E /Y
       <Project>{a1ae9708-cec0-45c5-8353-d27cf55e4054}</Project>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\vcpkg.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

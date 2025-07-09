@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "boost-signals2",
+    "glew",
+    "glm",
+    "sdl2",
+    "sdl2-image"
+  ]
+}
